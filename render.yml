@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: inventory-app
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn -k uvicorn.workers.UvicornWorker -w 2 app.main:app"
+    autoDeploy: true
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: inventory-db
+          property: connectionString
+      - key: APP_ENV
+        value: production
+      - key: TZ
+        value: Asia/Dhaka
+
+databases:
+  - name: inventory-db
