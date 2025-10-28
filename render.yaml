@@ -17,3 +17,4 @@ services:
 
 databases:
   - name: inventory-db
+
